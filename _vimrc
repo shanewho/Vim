@@ -14,6 +14,8 @@ set ignorecase
 set smartcase 
 set incsearch
 
+filetype plugin on "for NERDCommenter
+
 command -nargs=* FF :execute "vimgrep /" . expand("<args>") . "/j **" <BAR> cw
 map <F6> :q<CR>
 map <F8> :NERDTreeToggle %<CR>
@@ -40,4 +42,5 @@ else
    set directory=~/.vim/__backups//
    set backupdir=~/.vim/__backups//
    set tabstop=2 shiftwidth=2 expandtab
+   source ~/Documents/Vim/plugin/snipMate.vim
 end
