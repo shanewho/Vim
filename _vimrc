@@ -26,6 +26,10 @@ if has("gui_running")
   set lines=35 columns=100
 endif
 
+if has("gui_macvim")
+  map <D-j> :CtrlP<CR>
+end
+
 if has("win32") || has("win64")
    set tabstop=4 shiftwidth=4 expandtab
    set directory=$TMP
