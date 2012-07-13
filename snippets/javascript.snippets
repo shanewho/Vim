@@ -85,6 +85,30 @@ snippet gett
 
 ### Backbone Snippets
 snippet bind
-  _.bind(function(){
-			${2}
+	_.bind(function(){
+		${2}
 	},${1:this});
+
+### jasmine 
+snippet testf
+	describe("${1}", function() {    
+
+		beforeEach(function() {
+			
+		});
+
+		it("should ${2}", function() {
+			${3}
+		});
+	});
+
+snippet it
+	it("should ${1}", function() {
+		${2}
+	});
+	${3}
+
+snippet describe
+	describe("${1}", function() {  
+		${2}
+	});
