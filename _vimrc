@@ -17,6 +17,7 @@ set incsearch
 filetype plugin on "for NERDCommenter
 
 command -nargs=* FF :execute "vimgrep /" . expand("<args>") . "/j **" <BAR> cw
+command FLE :%s/\r\+$//e
 map <F6> :q<CR>
 map <F8> :NERDTreeToggle %<CR>
 map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
@@ -32,11 +33,23 @@ if has("gui_macvim")
   map <D-j> :CtrlP<CR>
 end
 
+
 if has("win32") || has("win64")
    set tabstop=4 shiftwidth=4 expandtab
    set directory=$TMP
    set backupdir=c:\temp\vim
-   set gfn=Consolas:h12:cANSI
+   set gfn=Consolas:h12:cANSI 
+
+   "TFS checkout on buffer modified
+   function! Tfcheckout()        
+       :let tf = system('"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout ' . expand('%:p'))        
+       set invreadonly    
+   endfunction
+
+   autocmd FileChangedShell * echohl WarningMsg | echo "File was updated outside of VIM" | echohl None
+   au FileChangedRO * :call Tfcheckout()
+   "######
+   
 else
    set guifont=Menlo:h18
    set directory=~/.vim/__backups//

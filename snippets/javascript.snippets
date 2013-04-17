@@ -102,6 +102,17 @@ snippet testf
 		});
 	});
 
+snippet test
+	define(['${1}'], function (${2}) {
+		describe("${3}", function() {  
+			it("should ${4}", function() {
+				${5}
+			});
+
+
+		});
+	});
+
 snippet it
 	it("should ${1}", function() {
 		${2}
@@ -111,4 +122,9 @@ snippet it
 snippet describe
 	describe("${1}", function() {  
 		${2}
+	});
+
+snippet define
+	define(['${1}'], function (${2}) {
+		${3}
 	});
