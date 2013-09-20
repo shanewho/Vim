@@ -13,6 +13,13 @@ set cindent
 set ignorecase 
 set smartcase 
 set incsearch
+let g:NERDTreeChDirMode=2
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
 
 filetype plugin on "for NERDCommenter
 
@@ -24,13 +31,27 @@ map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
 
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
 if has("gui_running")
-  colorscheme wombat
-  set lines=35 columns=100
+  "colorscheme wombat
+  colorscheme base16-ocean
+    if &diff "maximize if started in diff mode
+        au GUIEnter * simalt ~x
+        map <A-left> dp
+        map <A-right> do
+        map <A-up> [c
+        map <A-down> ]c
+    else
+      set lines=35 columns=100
+    endif
 endif
 
 if has("gui_macvim")
   map <D-j> :CtrlP<CR>
+
 end
 
 

@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='e:\dev\web\future\client\src\core'
 let g:netrw_dirhist_2='E:/Dev/Web/Future/Test'
 let g:netrw_dirhist_3='C:\Users\sblazek\Documents\GitHub\CefSharp\CefSharp'
+let g:netrw_dirhist_4='E:\Dev\ClientFramework_Core\Future\src\core'
+let g:netrw_dirhist_5='E:/Dev/ClientFramework_Core/Future/src/core'
