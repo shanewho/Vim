@@ -1,0 +1,14 @@
+<<<<<<< HEAD
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/shane/Downloads/cef_binary_1.1364.1123_macosx 2/cefclient.xcodeproj'
+let g:netrw_dirhist_2='/Users/shane/Code/C++/Music/cefclient.xcodeproj'
+=======
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='e:\dev\web\future\client\src\core'
+let g:netrw_dirhist_2='E:/Dev/Web/Future/Test'
+let g:netrw_dirhist_3='C:\Users\sblazek\Documents\GitHub\CefSharp\CefSharp'
+let g:netrw_dirhist_4='E:\Dev\ClientFramework_Core\Future\src\core'
+let g:netrw_dirhist_5='E:/Dev/ClientFramework_Core/Future/src/core'
+>>>>>>> 11738592c0c1edc83d45a8f8a8cbd54ed5192173

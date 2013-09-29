@@ -38,8 +38,8 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 if has("gui_running")
-  colorscheme wombat
-  "colorscheme base16-ocean
+  "colorscheme wombat
+  colorscheme base16-ocean
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp

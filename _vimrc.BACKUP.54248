@@ -13,7 +13,9 @@ set cindent
 set ignorecase 
 set smartcase 
 set incsearch
+<<<<<<< HEAD
 set tabstop=4 shiftwidth=4 expandtab
+=======
 let g:NERDTreeChDirMode=2
 
 "folding settings
@@ -21,6 +23,7 @@ set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
+>>>>>>> 11738592c0c1edc83d45a8f8a8cbd54ed5192173
 
 filetype plugin on "for NERDCommenter
 au BufNewFile,BufRead *.less set filetype=less
@@ -38,8 +41,8 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 if has("gui_running")
-  colorscheme wombat
-  "colorscheme base16-ocean
+  "colorscheme wombat
+  colorscheme base16-ocean
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
