@@ -13,8 +13,10 @@ set cindent
 set ignorecase 
 set smartcase 
 set incsearch
+set tabstop=4 shiftwidth=4 expandtab
 
 filetype plugin on "for NERDCommenter
+au BufNewFile,BufRead *.less set filetype=less
 
 command -nargs=* FF :execute "vimgrep /" . expand("<args>") . "/j **" <BAR> cw
 map <F6> :q<CR>
@@ -33,7 +35,6 @@ if has("gui_macvim")
 end
 
 if has("win32") || has("win64")
-   set tabstop=4 shiftwidth=4 expandtab
    set directory=$TMP
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI
@@ -41,6 +42,5 @@ else
    set guifont=Menlo:h18
    set directory=~/.vim/__backups//
    set backupdir=~/.vim/__backups//
-   set tabstop=2 shiftwidth=2 expandtab
    source ~/Documents/Vim/plugin/snipMate.vim
 end
