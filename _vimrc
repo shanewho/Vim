@@ -27,17 +27,23 @@ command -nargs=* FF :execute "vimgrep /" . expand("<args>") . "/j **" <BAR> cw
 command FLE :%s/\r\+$//e
 map <F6> :q<CR>
 map <F8> :NERDTreeToggle %<CR>
-map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+"map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+"map <F8> :execute "Ack " . expand("<cword>") <CR>
+map <F8> :Ack <cword><cr>
 map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
+map <leader>i :NERDTreeFind<cr>
 
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+" Ignore these directories
+" ctrlp?
+set wildignore+=*/Production/**
+
 if has("gui_running")
-  "colorscheme wombat
-  colorscheme base16-ocean
+  colorscheme wombat
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
