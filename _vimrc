@@ -25,8 +25,6 @@ set foldlevel=1         "this is just what i use
 filetype plugin on "for NERDCommenter
 au BufNewFile,BufRead *.less set filetype=less
 
-command -nargs=* FF :execute "vimgrep /" . expand("<args>") . "/j **" <BAR> cw
-command FLE :%s/\r\+$//e
 map <F6> :q<CR>
 map <F8> :NERDTreeToggle %<CR>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
