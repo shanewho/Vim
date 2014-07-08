@@ -1,3 +1,5 @@
+execute pathogen#infect()
+ 
 set vb "stop the ringing!!
 set nowrap
 set guioptions-=t
@@ -25,7 +27,7 @@ set foldlevel=1         "this is just what i use
 filetype plugin on "for NERDCommenter
 au BufNewFile,BufRead *.less set filetype=less
 
-map <F6> :q<CR>
+map <F6> SyntasticCheck<CR>
 map <F8> :NERDTreeToggle %<CR>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F8> :execute "Ack " . expand("<cword>") <CR>
@@ -38,12 +40,15 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+let g:ctrlp_working_path_mode = 0
+
 " Ignore these directories
 " ctrlp?
 set wildignore+=*/Production/**
 
 if has("gui_running")
-    colorscheme wombat
+    "colorscheme wombat
+    colorscheme base16-tomorrow
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
@@ -67,13 +72,13 @@ if has("win32") || has("win64")
    set gfn=Consolas:h12:cANSI 
 
    "TFS checkout on buffer modified
-   function! Tfcheckout()        
-       :let tf = system('"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout ' . expand('%:p'))        
-       set invreadonly    
-   endfunction
+   "function! Tfcheckout()        
+   "    :let tf = system('"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout ' . expand('%:p'))        
+   "    set invreadonly    
+   "endfunction
 
-   autocmd FileChangedShell * echohl WarningMsg | echo "File was updated outside of VIM" | echohl None
-   au FileChangedRO * :call Tfcheckout()
+   "autocmd FileChangedShell * echohl WarningMsg | echo "File was updated outside of VIM" | echohl None
+   "au FileChangedRO * :call Tfcheckout()
    "######
    
 else

@@ -11,9 +11,9 @@
 
 "{{{ Misc
 command! -nargs=0 R :PcfR
-command! -nargs=0 T :PcfT
-command! -nargs=0 PcfT :call <SID>RelatedTest()
+command! -nargs=0 A :PcfA
 command! -nargs=0 PcfR :call <SID>RelatedView()
+command! -nargs=0 PcfA :call <SID>RelatedTest()
 map <F2> :so C:\Users\sblazek\Documents\vim\plugin\pcf.vim<CR>
 map <F3> :PcfR<CR>
 map <F4> :PcfT<CR>
@@ -27,17 +27,24 @@ endfunction"}}}
 
 function! s:RelatedTest()"{{{
     let related = s:GetRelatedTest(expand('%:p'))
-    echo related
     "return
     exec('e ' . related)
 endfunction"}}}
 
 function! s:GetRelatedTest(file)
   if match(a:file, '.*Spec.js') >=# 0
-    let name = substitute(a:file, '\v(.*)\\Test\\.*\\(.*)Spec.js$', '\2', '')
-    let path = substitute(a:file, '\v(.*)\\Test\\.*\\(.*)Spec.js$', '\1\\', '')
+    "let name = substitute(a:file, '\v(.*)\\Test\\.*\\(.*)Spec.js$', '\2', '')
+    let name = substitute(expand('%:t'), '\v(.*)Spec\.js', '\1.js', '')
+    "let path = substitute(a:file, '\v(.*)\\Test\\.*\\*(.*)Spec.js$', '\1\\src', '')
+    let path = substitute(expand('%:h'), '\v(.*)\\Test\\(.*)$', '\1\\src', '')
 
-    let matches = split(globpath(path, '**\' . name . '.js'), '\n')
+    "echo name
+    "echo path
+    "echo expand('%:h')
+
+    let matches = split(globpath(path, '**/' . name), '\n')
+    echo len(matches)
+    "return
     if len(matches) == 0
         return ''
     endif
@@ -51,10 +58,15 @@ function! s:GetRelatedTest(file)
       return match
     endif
   elseif match(a:file, '\v\.js') >=# 0
-    let name = substitute(a:file, '\v(.*)\\src\\.*\\(.*).js$', '\2Spec.js', '')
-    let path = substitute(a:file, '\v(.*)\\src\\.*\\(.*).js$', '\1\\test', '')
+    let name = substitute(expand('%:t'), '\v(.*)\.js', '\1Spec.js', '')
+    let path = substitute(expand('%:h'), '\v(.*)\\src\\*(.*)$', '\1\\test\\spec', '') "spec doesn't exist in most packages
 
-    let matches = split(globpath(path, '**\' . name), '\n')
+
+    "echo name
+    "echo path
+    let matches = split(globpath(path, '**/' . name), '\n')
+    "echo len(matches)
+    "return
     if len(matches) == 0
         return ''
     endif
