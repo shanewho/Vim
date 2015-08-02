@@ -128,3 +128,23 @@ snippet define
 	define(['${1}'], function (${2}) {
 		${3}
 	});
+
+snippet component
+	import React from 'react';
+
+	class ${1} extends React.Component {
+		constructor(props) {
+			super(props);
+
+			this.state={
+			};
+		}
+
+		render() {
+			return (
+				${2}
+			);
+		}
+	}
+
+	export default ${3};

@@ -131,7 +131,11 @@ snippet base
 snippet r
 	<br`Close()[1:]`>
 snippet div
-	<div id="${1:name}">
+	<div>
+		${1}
+	</div>
+snippet divc
+	<div class="${1}">
 		${2}
 	</div>
 # Embed QT Movie
@@ -162,7 +166,7 @@ snippet form
 	<p><input type="submit" value="Continue &rarr;"`Close()`></p>
 	</form>
 snippet h1
-	<h1 id="${1:heading}">${2:$1}</h1>
+	<h1>${$1}</h1>
 snippet input
 	<input type="${1:text/submit/hidden/button}" name="${2:some_name}" value="${3}"`Close()`>${4}
 snippet label
