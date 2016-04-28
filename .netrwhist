@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/shane/Downloads/cef_binary_1.1364.1123_macosx 2/cefclient.xcodeproj'
-let g:netrw_dirhist_2='/Users/shane/Code/C++/Music/cefclient.xcodeproj'
-let g:netrw_dirhist_3='C:/Users/sblazek/Documents/vim'
-let g:netrw_dirhist_4='c:/Users/sblazek/.ssh'
