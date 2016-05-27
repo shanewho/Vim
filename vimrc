@@ -67,7 +67,7 @@ if has("win32") || has("win64")
    set gfn=Consolas:h12:cANSI 
 else
    set guifont=Menlo:h18
-   set directory=~/.vim/__backups//
-   set backupdir=~/.vim/__backups//
+   set directory=~/.vim__backups//
+   set backupdir=~/.vim__backups//
 "   source ~/Documents/Vim/plugin/snipMate.vim
 end
