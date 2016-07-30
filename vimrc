@@ -44,6 +44,10 @@ let g:html_indent_style1 = "inc"
 let g:ctrlp_working_path_mode = 0
 let g:syntastic_javascript_checkers=['eslint']
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 
 if has("gui_running")
     colorscheme base16-ocean
