@@ -11,8 +11,8 @@ set number
 set guioptions+=b
 set hlsearch
 set hidden
-set autoindent
-set cindent
+"set autoindent
+"set cindent
 set ignorecase 
 set smartcase 
 set incsearch
@@ -26,6 +26,7 @@ set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
 filetype plugin on "for NERDCommenter
+filetype plugin indent on
 au BufNewFile,BufRead *.less set filetype=less
 
 map <F6> SyntasticCheck<CR>
@@ -49,6 +50,8 @@ if executable('ag')
 endif
 
 
+let g:vim_json_syntax_conceal = 0
+
 if has("gui_running")
     colorscheme base16-ocean
     if &diff "maximize if started in diff mode
@@ -68,9 +71,13 @@ end
 
 
 if has("win32") || has("win64")
+   source $VIMRUNTIME/mswin.vim
+   behave mswin
+
    set directory=$TMP
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI 
+   let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
 else
    set guifont=Menlo:h18
    set directory=~/.vim__backups//
