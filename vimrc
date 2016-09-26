@@ -45,6 +45,10 @@ let g:html_indent_style1 = "inc"
 let g:ctrlp_working_path_mode = 0
 let g:syntastic_javascript_checkers=['eslint']
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 
 let g:vim_json_syntax_conceal = 0
 
