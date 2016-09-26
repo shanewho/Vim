@@ -48,6 +48,10 @@ let g:syntastic_javascript_checkers=['eslint']
 
 let g:vim_json_syntax_conceal = 0
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 if has("gui_running")
     colorscheme base16-ocean
     if &diff "maximize if started in diff mode
