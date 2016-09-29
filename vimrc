@@ -16,7 +16,7 @@ set hidden
 set ignorecase 
 set smartcase 
 set incsearch
-set tabstop=4 shiftwidth=4 expandtab
+set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
 
 "folding settings
@@ -42,8 +42,10 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+let g:NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 0
 let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_args = "--fix"
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
