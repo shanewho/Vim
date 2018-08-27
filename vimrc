@@ -38,14 +38,19 @@ map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
 map <leader>i :NERDTreeFind<cr>
 
+autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
+autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
+
+
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 let g:NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 0
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_args = "--fix"
+let g:syntastic_javascript_checkers=['standard']
+let g:syntastic_javascript_standard_args = "--fix"
+let g:ale_lint_on_text_changed = 'never'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -75,6 +80,21 @@ if has("gui_macvim")
   map <D-j> :CtrlP<CR>
 end
 
+function! BackgroundCommandClose(channel) 
+  if s:beforeSaveWin == win_getid()
+    exec ':e'
+  endif
+endfunction 
+
+function! JSFix(filename) 
+    let s:beforeSaveWin = win_getid()
+    let cmd = 'C:\Windows\system32\cmd.exe /c (standard --fix '.expand('%:p').')'
+    "let cmd = 'standard --fix '.expand('%:p')
+    "let g:backgroundCommandOutput = 'C:\temp\vim\fixoutput.txt'
+    "let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose', 'out_io': 'file', 'out_name': g:backgroundCommandOutput})                 
+    let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose'})                 
+endfu 
+
 
 if has("win32") || has("win64")
    source $VIMRUNTIME/mswin.vim
@@ -84,6 +104,9 @@ if has("win32") || has("win64")
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI 
    let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
+
+   command! -bang -nargs=* -complete=file JSFix call JSFix(<q-args>) 
+   :autocmd BufWritePost *.js :JSFix
 else
    set guifont=Menlo:h18
    set directory=~/.vim__backups//
