@@ -1,6 +1,31 @@
-execute pathogen#infect()
- 
-syntax enable
+call plug#begin(expand('<sfile>:p:h').'/plugged')
+  Plug 'tpope/vim-sensible'
+  Plug 'scrooloose/nerdtree'
+  Plug 'chriskempson/base16-vim'
+  Plug 'kien/ctrlp.vim'
+  Plug 'vim-scripts/mru.vim'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'pangloss/vim-javascript'
+  Plug 'elzr/vim-json'
+  Plug 'tpope/vim-repeat'
+  Plug 'mileszs/ack.vim'
+	Plug 'scrooloose/syntastic'
+	Plug 'garbas/vim-snipmate'
+	Plug 'tomtom/tlib_vim'
+	Plug 'MarcWeber/vim-addon-mw-utils'
+	Plug 'honza/vim-snippets'
+	Plug 'mileszs/ack.vim'
+	Plug 'w0rp/ale'
+  if has("win32") || has("win64")
+    Plug 'neowit/vim-force.com'
+    Plug 'sheerun/prettier-standard'
+    let g:ale_fixers = {'javascript': ['prettier_standard']}
+    let g:ale_fix_on_save = 1
+  else
+  end
+call plug#end()
+
+""syntax enable
 set vb "stop the ringing!!
 set nowrap
 set guioptions-=t
@@ -15,7 +40,7 @@ set hidden
 "set cindent
 set ignorecase 
 set smartcase 
-set incsearch
+""set incsearch
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
 
@@ -31,9 +56,19 @@ au BufNewFile,BufRead *.less set filetype=less
 
 map <F6> SyntasticCheck<CR>
 map <F8> :NERDTreeToggle %<CR>
+map <leader>at :execute ':ApexTest tooling-async ' . expand('%:r') . '.' . expand('<cword>') <cr>
+map <leader>ad :ApexDeployOne<cr>
+map <leader>as :ApexScratch<cr>
+map <leader>aq :ApexQuery<cr>
+map <leader>aa :ApexExecuteAnonymous<cr>
+
+
+let NERDTreeIgnore = ['.cls.meta.xml$']
+map q <C-w><C-q>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F8> :execute "Ack " . expand("<cword>") <CR>
 map <F8> :Ack <cword><cr>
+
 map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
 map <leader>i :NERDTreeFind<cr>
@@ -48,9 +83,8 @@ let g:html_indent_style1 = "inc"
 
 let g:NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 0
-let g:syntastic_javascript_checkers=['standard']
-let g:syntastic_javascript_standard_args = "--fix"
-let g:ale_lint_on_text_changed = 'never'
+" let g:syntastic_javascript_checkers=['standard']
+" let g:syntastic_javascript_standard_args = "--fix"
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -104,9 +138,27 @@ if has("win32") || has("win64")
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI 
    let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
+   
+   
+   "vim force
+   let g:apex_messages_split_type = 'split' " split window horizontally
+   let g:apex_tooling_force_dot_com_path = "C:\\path\\toolling-force.com.jar\\tooling-force.com-assembly-v0.4.2.0.jar"
+   if !exists("g:apex_backup_folder")
+     " full path required here, relative may not work
+     let g:apex_backup_folder="c:\\temp\\apex\\backup"
+   endif
+   if !exists("g:apex_temp_folder")
+     " full path required here, relative may not work
+     let g:apex_temp_folder="c:\\temp\\apex\\gvim-deployment"
+   endif
+   if !exists("g:apex_properties_folder")
+     " full path required here, relative may not work
+     let g:apex_properties_folder="c:\\temp\\vim-force.com-tests\\secure-properties"
+   endif
+   let g:apex_workspace_path="c:\\temp\\vim-force.com-tests"
+   set autowrite
 
-   command! -bang -nargs=* -complete=file JSFix call JSFix(<q-args>) 
-   :autocmd BufWritePost *.js :JSFix
+
 else
    set guifont=Menlo:h18
    set directory=~/.vim__backups//
