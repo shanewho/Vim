@@ -137,7 +137,7 @@ if has("win32") || has("win64")
    set directory=$TMP
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI 
-   let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
+   "let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
    
    
    "vim force
