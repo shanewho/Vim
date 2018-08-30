@@ -2,6 +2,7 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'tpope/vim-sensible'
   Plug 'scrooloose/nerdtree'
   Plug 'chriskempson/base16-vim'
+  Plug 'mustache/vim-mustache-handlebars'
   Plug 'kien/ctrlp.vim'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
@@ -9,19 +10,17 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'elzr/vim-json'
   Plug 'tpope/vim-repeat'
   Plug 'mileszs/ack.vim'
-	Plug 'scrooloose/syntastic'
 	Plug 'garbas/vim-snipmate'
 	Plug 'tomtom/tlib_vim'
 	Plug 'MarcWeber/vim-addon-mw-utils'
 	Plug 'honza/vim-snippets'
-	Plug 'mileszs/ack.vim'
 	Plug 'w0rp/ale'
+  Plug 'sheerun/prettier-standard'
+
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
-    Plug 'sheerun/prettier-standard'
-    let g:ale_fixers = {'javascript': ['prettier_standard']}
-    let g:ale_fix_on_save = 1
   else
+    let g:ale_javascript_eslint_suppress_missing_config = 1
   end
 call plug#end()
 
@@ -92,6 +91,9 @@ endif
 
 
 let g:vim_json_syntax_conceal = 0
+
+let g:ale_fixers = {'javascript': ['prettier_standard']}
+let g:ale_fix_on_save = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
