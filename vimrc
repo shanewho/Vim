@@ -16,6 +16,11 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 	Plug 'honza/vim-snippets'
 	Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
+" Plug 'chriskempson/base16-vim'
+  Plug 'haishanh/night-owl.vim'
+  Plug 'jiangmiao/auto-pairs'
+  
+  
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
@@ -42,6 +47,12 @@ set smartcase
 ""set incsearch
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
+
+set fillchars+=vert:│ "solid line
+:inoremap jj <Esc>
+:cmap jj <Esc>
+
+
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -72,6 +83,8 @@ map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
 map <leader>i :NERDTreeFind<cr>
 
+let NERDTreeMinimalUI
+
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
 autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
 
@@ -100,7 +113,7 @@ if executable('ag')
 endif
 
 if has("gui_running")
-    colorscheme base16-ocean
+    colorscheme night-owl
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
