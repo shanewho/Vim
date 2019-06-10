@@ -16,11 +16,15 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 	Plug 'MarcWeber/vim-addon-mw-utils'
 	Plug 'honza/vim-snippets'
 	Plug 'w0rp/ale'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+  Plug 'sheerun/prettier-standard'
+" Plug 'chriskempson/base16-vim'
+  Plug 'haishanh/night-owl.vim'
+  "Plug 'jiangmiao/auto-pairs'
+  "Plug '/usr/local/opt/fzf'
+  "Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   Plug 'junegunn/fzf.vim'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'majutsushi/tagbar'
-  "Plug 'sheerun/prettier-standard'
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
@@ -46,6 +50,12 @@ set smartcase
 ""set incsearch
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
+
+set fillchars+=vert:│ "solid line
+:inoremap jj <Esc>
+:cmap jj <Esc>
+
+
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -80,6 +90,8 @@ map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
 
+let NERDTreeMinimalUI
+
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
 autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
 
@@ -103,13 +115,15 @@ let g:vim_json_syntax_conceal = 0
 let g:ale_javascript_eslint_suppress_missing_config = 1
 let g:ale_fixers = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
+let g:ale_sign_error = '⚠'
+" let g:ale_sign_warning = '--'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
 if has("gui_running")
-    colorscheme base16-ocean
+    colorscheme night-owl
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
