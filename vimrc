@@ -19,6 +19,8 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 " Plug 'chriskempson/base16-vim'
   Plug 'haishanh/night-owl.vim'
   Plug 'jiangmiao/auto-pairs'
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
   
   
 
@@ -107,6 +109,8 @@ let g:vim_json_syntax_conceal = 0
 
 let g:ale_fixers = {'javascript': ['prettier_standard']}
 let g:ale_fix_on_save = 1
+let g:ale_sign_error = '⚠'
+" let g:ale_sign_warning = '--'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
