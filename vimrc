@@ -3,7 +3,8 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'chriskempson/base16-vim'
   Plug 'mustache/vim-mustache-handlebars'
-  Plug 'kien/ctrlp.vim'
+  " Plug 'kien/ctrlp.vim'
+  Plug 'sheerun/vim-polyglot'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'pangloss/vim-javascript'
@@ -15,12 +16,15 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 	Plug 'MarcWeber/vim-addon-mw-utils'
 	Plug 'honza/vim-snippets'
 	Plug 'w0rp/ale'
-  Plug 'sheerun/prettier-standard'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'majutsushi/tagbar'
+  "Plug 'sheerun/prettier-standard'
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
   else
-    let g:ale_javascript_eslint_suppress_missing_config = 1
   end
 call plug#end()
 
@@ -53,23 +57,27 @@ filetype plugin on "for NERDCommenter
 filetype plugin indent on
 au BufNewFile,BufRead *.less set filetype=less
 
-map <F6> SyntasticCheck<CR>
-map <F8> :NERDTreeToggle %<CR>
 map <leader>at :execute ':ApexTest tooling-async ' . expand('%:r') . '.' . expand('<cword>') <cr>
 map <leader>ad :ApexDeployOne<cr>
 map <leader>as :ApexScratch<cr>
 map <leader>aq :ApexQuery<cr>
 map <leader>aa :ApexExecuteAnonymous<cr>
+nmap <C-p> :Files <cr>
+nmap <C-t> :BTags <cr>
+nmap <C-T> :Tags <cr>
+map <leader>r :rg<cr>
+map <leader>f :BLines<cr>
+
 
 
 let NERDTreeIgnore = ['.cls.meta.xml$']
 map q <C-w><C-q>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F8> :execute "Ack " . expand("<cword>") <CR>
+"
 map <F8> :Ack <cword><cr>
-
-map <F9> :TlistToggle %<CR>
 map <F11> :NERDTreeToggle<CR>
+map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
 
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
@@ -92,7 +100,8 @@ endif
 
 let g:vim_json_syntax_conceal = 0
 
-let g:ale_fixers = {'javascript': ['prettier_standard']}
+let g:ale_javascript_eslint_suppress_missing_config = 1
+let g:ale_fixers = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
 
 if executable('ag')
@@ -155,9 +164,9 @@ if has("win32") || has("win64")
    endif
    if !exists("g:apex_properties_folder")
      " full path required here, relative may not work
-     let g:apex_properties_folder="c:\\temp\\vim-force.com-tests\\secure-properties"
+     let g:apex_properties_folder="c:\\code\\salesforce-sync\\secure-properties"
    endif
-   let g:apex_workspace_path="c:\\temp\\vim-force.com-tests"
+   let g:apex_workspace_path="c:\\code\\salesforce-sync"
    set autowrite
 
 
