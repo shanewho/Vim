@@ -85,7 +85,8 @@ map q <C-w><C-q>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F8> :execute "Ack " . expand("<cword>") <CR>
 "
-map <F8> :Ack <cword><cr>
+" map <F8> :Ack <cword><cr>
+map <F8> :Rg <cword><cr>
 map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
