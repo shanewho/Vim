@@ -7,14 +7,14 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
-  Plug 'pangloss/vim-javascript'
-  Plug 'elzr/vim-json'
+  " Plug 'pangloss/vim-javascript'
+  " Plug 'elzr/vim-json'
   Plug 'tpope/vim-repeat'
-  Plug 'mileszs/ack.vim'
-	Plug 'garbas/vim-snipmate'
-	Plug 'tomtom/tlib_vim'
-	Plug 'MarcWeber/vim-addon-mw-utils'
-	Plug 'honza/vim-snippets'
+  " Plug 'mileszs/ack.vim'
+	" Plug 'garbas/vim-snipmate'
+	" Plug 'tomtom/tlib_vim'
+	" Plug 'MarcWeber/vim-addon-mw-utils'
+	" Plug 'honza/vim-snippets'
 	Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
 " Plug 'chriskempson/base16-vim'
@@ -26,7 +26,6 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'majutsushi/tagbar'
   Plug 'tpope/vim-surround'
-  
   
 
   if has("win32") || has("win64")
@@ -55,9 +54,6 @@ set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
 
 set fillchars+=vert:│ "solid line
-:inoremap jj <Esc>
-:cmap jj <Esc>
-
 
 
 "folding settings
