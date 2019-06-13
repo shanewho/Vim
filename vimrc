@@ -25,6 +25,9 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'majutsushi/tagbar'
+  Plug 'tpope/vim-surround'
+  
+  
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
