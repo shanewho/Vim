@@ -1,30 +1,32 @@
+set encoding=utf-8
+
 call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
   Plug 'scrooloose/nerdtree'
-  Plug 'chriskempson/base16-vim'
   Plug 'mustache/vim-mustache-handlebars'
   " Plug 'kien/ctrlp.vim'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
-  Plug 'pangloss/vim-javascript'
+  " Plug 'pangloss/vim-javascript'
   Plug 'elzr/vim-json'
   Plug 'tpope/vim-repeat'
   Plug 'mileszs/ack.vim'
-	Plug 'garbas/vim-snipmate'
-	Plug 'tomtom/tlib_vim'
-	Plug 'MarcWeber/vim-addon-mw-utils'
-	Plug 'honza/vim-snippets'
+	" Plug 'garbas/vim-snipmate'
+	" Plug 'tomtom/tlib_vim'
+	" Plug 'MarcWeber/vim-addon-mw-utils'
+	" Plug 'honza/vim-snippets'
 	Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
 " Plug 'chriskempson/base16-vim'
   Plug 'haishanh/night-owl.vim'
   "Plug 'jiangmiao/auto-pairs'
   "Plug '/usr/local/opt/fzf'
-  "Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   Plug 'junegunn/fzf.vim'
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'majutsushi/tagbar'
+  "Plug 'ludovicchabant/vim-gutentags'
+  "Plug 'majutsushi/tagbar'
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
@@ -50,12 +52,7 @@ set smartcase
 ""set incsearch
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
-
-set fillchars+=vert:│ "solid line
-:inoremap jj <Esc>
-:cmap jj <Esc>
-
-
+set fillchars+=vert:│
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -72,26 +69,26 @@ map <leader>ad :ApexDeployOne<cr>
 map <leader>as :ApexScratch<cr>
 map <leader>aq :ApexQuery<cr>
 map <leader>aa :ApexExecuteAnonymous<cr>
-nmap <C-p> :Files <cr>
+nmap <C-p> :GFiles <cr>
 nmap <C-t> :BTags <cr>
 nmap <C-T> :Tags <cr>
-map <leader>r :rg<cr>
+map <leader>r :Ag<cr>
 map <leader>f :BLines<cr>
 
 
 
 let NERDTreeIgnore = ['.cls.meta.xml$']
-map q <C-w><C-q>
+"map q <C-w><C-q>
 "map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F8> :execute "Ack " . expand("<cword>") <CR>
 "
 " map <F8> :Ack <cword><cr>
 map <F8> :Rg <cword><cr>
+map <F9> :vim <cword> %<cr>:cwin<cr>
+
 map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
-
-let NERDTreeMinimalUI
 
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
 autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
@@ -115,9 +112,10 @@ let g:vim_json_syntax_conceal = 0
 
 let g:ale_javascript_eslint_suppress_missing_config = 1
 let g:ale_fixers = {'javascript': ['standard']}
+let g:ale_linters = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
-let g:ale_sign_error = '⚠'
-" let g:ale_sign_warning = '--'
+let g:ale_sign_error = '→'
+let g:ale_sign_warning = '⮆'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
