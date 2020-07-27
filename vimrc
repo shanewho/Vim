@@ -10,9 +10,9 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
   " Plug 'pangloss/vim-javascript'
-  Plug 'elzr/vim-json'
+  " Plug 'elzr/vim-json'
   Plug 'tpope/vim-repeat'
-  Plug 'mileszs/ack.vim'
+  " Plug 'mileszs/ack.vim'
 	" Plug 'garbas/vim-snipmate'
 	" Plug 'tomtom/tlib_vim'
 	" Plug 'MarcWeber/vim-addon-mw-utils'
@@ -25,8 +25,10 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   "Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   Plug 'junegunn/fzf.vim'
-  "Plug 'ludovicchabant/vim-gutentags'
-  "Plug 'majutsushi/tagbar'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'majutsushi/tagbar'
+  Plug 'tpope/vim-surround'
+  
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
@@ -53,6 +55,9 @@ set smartcase
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
 set fillchars+=vert:│
+
+set fillchars+=vert:│ "solid line
+
 
 "folding settings
 set foldmethod=indent   "fold based on indent
