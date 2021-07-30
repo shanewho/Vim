@@ -110,6 +110,7 @@ let g:ale_linters = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '→'
 let g:ale_sign_warning = '⮆'
+let ale_javascript_standard_use_global = 1 " https://github.com/dense-analysis/ale/pull/3046
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
