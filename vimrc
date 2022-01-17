@@ -1,6 +1,7 @@
 set encoding=utf-8
 
 call plug#begin(expand('<sfile>:p:h').'/plugged')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
   Plug 'scrooloose/nerdtree'
@@ -112,6 +113,8 @@ let g:ale_sign_error = '→'
 let g:ale_sign_warning = '⮆'
 let ale_javascript_standard_use_global = 1 " https://github.com/dense-analysis/ale/pull/3046
 
+let g:coc_global_extensions = ['coc-tsserver']
+
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -138,16 +141,6 @@ function! BackgroundCommandClose(channel)
     exec ':e'
   endif
 endfunction 
-
-function! JSFix(filename) 
-    let s:beforeSaveWin = win_getid()
-    let cmd = 'C:\Windows\system32\cmd.exe /c (standard --fix '.expand('%:p').')'
-    "let cmd = 'standard --fix '.expand('%:p')
-    "let g:backgroundCommandOutput = 'C:\temp\vim\fixoutput.txt'
-    "let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose', 'out_io': 'file', 'out_name': g:backgroundCommandOutput})                 
-    let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose'})                 
-endfu 
-
 
 if has("win32") || has("win64")
    source $VIMRUNTIME/mswin.vim
@@ -184,3 +177,18 @@ else
    set backupdir=~/.vim__backups//
 "   source ~/Documents/Vim/plugin/snipMate.vim
 end
+
+
+" COC Config
+"to make sure tab is not mapped already
+verbose imap <tab> 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
