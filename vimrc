@@ -7,26 +7,15 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
-  " Plug 'pangloss/vim-javascript'
-  " Plug 'elzr/vim-json'
   Plug 'tpope/vim-repeat'
-  " Plug 'mileszs/ack.vim'
-	" Plug 'garbas/vim-snipmate'
-	" Plug 'tomtom/tlib_vim'
-	" Plug 'MarcWeber/vim-addon-mw-utils'
-	" Plug 'honza/vim-snippets'
-	Plug 'w0rp/ale'
-  Plug 'sheerun/prettier-standard'
-" Plug 'chriskempson/base16-vim'
-  Plug 'haishanh/night-owl.vim'
-  "Plug 'jiangmiao/auto-pairs'
-  "Plug '/usr/local/opt/fzf'
-  "Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'majutsushi/tagbar'
-  Plug 'tpope/vim-surround'
+	"Plug 'w0rp/ale'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   
+  "Plug 'sheerun/prettier-standard'
+  Plug 'haishanh/night-owl.vim'
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-surround'
 
   if has("win32") || has("win64")
     Plug 'neowit/vim-force.com'
@@ -71,11 +60,15 @@ map <leader>ad :ApexDeployOne<cr>
 map <leader>as :ApexScratch<cr>
 map <leader>aq :ApexQuery<cr>
 map <leader>aa :ApexExecuteAnonymous<cr>
-nmap <C-p> :Files <cr>
+nmap <C-p> :GFiles <cr>
 nmap <C-t> :BTags <cr>
 nmap <C-T> :Tags <cr>
-map <leader>r :rg<cr>
+map <leader>r :Rg<cr>
 map <leader>f :BLines<cr>
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
 
 
 
@@ -89,8 +82,6 @@ map <F8> :Rg <cword><cr>
 map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
-
-let NERDTreeMinimalUI
 
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
 autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
@@ -113,10 +104,12 @@ endif
 let g:vim_json_syntax_conceal = 0
 
 let g:ale_javascript_eslint_suppress_missing_config = 1
-let g:ale_fixers = {'javascript': ['standard']}
+"let g:ale_fixers = {'javascript': ['standard']}
+let g:ale_fixers = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_fix_on_save = 1
-let g:ale_sign_error = '⚠'
-" let g:ale_sign_warning = '--'
+let g:ale_sign_error = ' ✗'
+let g:ale_sign_warning = ' ☛' "⚠'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -124,6 +117,8 @@ endif
 
 if has("gui_running")
     colorscheme night-owl
+    highlight ALEErrorSign guifg=#EF5350 guibg=#011627 
+
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
@@ -145,14 +140,14 @@ function! BackgroundCommandClose(channel)
   endif
 endfunction 
 
-function! JSFix(filename) 
-    let s:beforeSaveWin = win_getid()
-    let cmd = 'C:\Windows\system32\cmd.exe /c (standard --fix '.expand('%:p').')'
-    "let cmd = 'standard --fix '.expand('%:p')
-    "let g:backgroundCommandOutput = 'C:\temp\vim\fixoutput.txt'
-    "let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose', 'out_io': 'file', 'out_name': g:backgroundCommandOutput})                 
-    let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose'})                 
-endfu 
+" function! JSFix(filename) 
+    " let s:beforeSaveWin = win_getid()
+    " let cmd = 'C:\Windows\system32\cmd.exe /c (standard --fix '.expand('%:p').')'
+    " "let cmd = 'standard --fix '.expand('%:p')
+    " "let g:backgroundCommandOutput = 'C:\temp\vim\fixoutput.txt'
+    " "let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose', 'out_io': 'file', 'out_name': g:backgroundCommandOutput})                 
+    " let j2 = job_start(cmd, {'close_cb': 'BackgroundCommandClose'})                 
+" endfu 
 
 
 if has("win32") || has("win64")
