@@ -9,6 +9,7 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-scripts/mru.vim'
   Plug 'scrooloose/nerdcommenter'
+  Plug 'kburdett/vim-nuuid'
   Plug 'tpope/vim-repeat'
 	"Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
@@ -182,6 +183,7 @@ end
 
 
 " COC Config
+set updatetime=300
 "to make sure tab is not mapped already
 verbose imap <tab> 
 inoremap <silent><expr> <TAB>
@@ -194,3 +196,17 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+
