@@ -14,18 +14,12 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 	"Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
   Plug 'haishanh/night-owl.vim'
-  "Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-surround'
 
-  if has("win32") || has("win64")
-    Plug 'neowit/vim-force.com'
-  else
-  end
 call plug#end()
 
-""syntax enable
 set vb "stop the ringing!!
 set nowrap
 set guioptions-=t
@@ -43,8 +37,6 @@ set smartcase
 ""set incsearch
 set tabstop=2 shiftwidth=2 expandtab
 let g:NERDTreeChDirMode=2
-set fillchars+=vert:│
-
 set fillchars+=vert:│ "solid line
 
 
@@ -56,13 +48,7 @@ set foldlevel=1         "this is just what i use
 
 filetype plugin on "for NERDCommenter
 filetype plugin indent on
-au BufNewFile,BufRead *.less set filetype=less
 
-map <leader>at :execute ':ApexTest tooling-async ' . expand('%:r') . '.' . expand('<cword>') <cr>
-map <leader>ad :ApexDeployOne<cr>
-map <leader>as :ApexScratch<cr>
-map <leader>aq :ApexQuery<cr>
-map <leader>aa :ApexExecuteAnonymous<cr>
 nmap <C-p> :GFiles <cr>
 nmap <C-t> :BTags <cr>
 nmap <C-T> :Tags <cr>
@@ -74,13 +60,8 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
-
-
 let NERDTreeIgnore = ['.cls.meta.xml$']
-"map q <C-w><C-q>
-"map <F8> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-"map <F8> :execute "Ack " . expand("<cword>") <CR>
-"
+
 " map <F8> :Ack <cword><cr>
 map <F8> :Rg <cword><cr>
 map <F9> :vim <cword> %<cr>:cwin<cr>
@@ -88,7 +69,6 @@ map <F9> :vim <cword> %<cr>:cwin<cr>
 map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
-
 autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
 autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
 
@@ -99,21 +79,7 @@ let g:html_indent_style1 = "inc"
 
 let g:NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 0
-" let g:syntastic_javascript_checkers=['standard']
-" let g:syntastic_javascript_standard_args = "--fix"
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-
 let g:vim_json_syntax_conceal = 0
-
-let g:ale_javascript_eslint_suppress_missing_config = 1
-let g:ale_fixers = {'javascript': ['eslint']}
-let g:ale_linters = {'javascript': ['eslint']}
-let g:ale_fix_on_save = 1
-let ale_javascript_standard_use_global = 1 " https://github.com/dense-analysis/ale/pull/3046
 let g:coc_global_extensions = ['coc-tsserver']
 
 if executable('ag')
@@ -122,8 +88,6 @@ endif
 
 if has("gui_running")
     colorscheme night-owl
-    highlight ALEErrorSign guifg=#EF5350 guibg=#011627 
-
     if &diff "maximize if started in diff mode
         au GUIEnter * simalt ~x
         map <A-left> dp
@@ -139,12 +103,6 @@ if has("gui_macvim")
   map <D-j> :CtrlP<CR>
 end
 
-function! BackgroundCommandClose(channel) 
-  if s:beforeSaveWin == win_getid()
-    exec ':e'
-  endif
-endfunction 
-
 if has("win32") || has("win64")
    source $VIMRUNTIME/mswin.vim
    behave mswin
@@ -153,49 +111,37 @@ if has("win32") || has("win64")
    set backupdir=c:\temp\vim
    set gfn=Consolas:h12:cANSI 
    "let g:NERDTreeCopyCmd= 'cp -r ' "Fix nerd tree copy menu
-   
-   
-   "vim force
-   let g:apex_messages_split_type = 'split' " split window horizontally
-   let g:apex_tooling_force_dot_com_path = "C:\\path\\toolling-force.com.jar\\tooling-force.com-assembly-v0.4.2.0.jar"
-   if !exists("g:apex_backup_folder")
-     " full path required here, relative may not work
-     let g:apex_backup_folder="c:\\temp\\apex\\backup"
-   endif
-   if !exists("g:apex_temp_folder")
-     " full path required here, relative may not work
-     let g:apex_temp_folder="c:\\temp\\apex\\gvim-deployment"
-   endif
-   if !exists("g:apex_properties_folder")
-     " full path required here, relative may not work
-     let g:apex_properties_folder="c:\\code\\salesforce-sync\\secure-properties"
-   endif
-   let g:apex_workspace_path="c:\\code\\salesforce-sync"
    set autowrite
-
-
 else
    set guifont=Menlo:h18
    set directory=~/.vim__backups//
    set backupdir=~/.vim__backups//
-"   source ~/Documents/Vim/plugin/snipMate.vim
 end
 
 
 " COC Config
 set updatetime=300
-"to make sure tab is not mapped already
-verbose imap <tab> 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" imap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<Tab>"
+
+" inoremap <silent><expr> <TAB>
+  " \ coc#pum#visible() ? coc#_select_confirm() :
+  " \ coc#expandableOrJumpable() ?
+  " \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  " \ CheckBackspace() ? "\<TAB>" :
+  " \ coc#refresh()
+
+" function! CheckBackspace() abort
+  " let col = col('.') - 1
+  " return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
