@@ -11,6 +11,9 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
   Plug 'scrooloose/nerdcommenter'
   Plug 'kburdett/vim-nuuid'
   Plug 'tpope/vim-repeat'
+
+  Plug 'puremourning/vimspector'
+  
 	"Plug 'w0rp/ale'
   Plug 'sheerun/prettier-standard'
   Plug 'haishanh/night-owl.vim'
@@ -66,12 +69,12 @@ let NERDTreeIgnore = ['.cls.meta.xml$']
 map <F8> :Rg <cword><cr>
 map <F9> :vim <cword> %<cr>:cwin<cr>
 
+map <leader>n :NERDTreeToggle<CR>
 map <F11> :NERDTreeToggle<CR>
 map <F12> :TagbarToggle<CR>
 map <leader>i :NERDTreeFind<cr>
-autocmd BufNewFile,BufRead *.apxc set syntax=apexcode
-autocmd BufNewFile,BufRead *.apxt set syntax=apexcode
 
+au BufNewFile,BufRead *.script\|*.gui_script\|*.render_script\|*.editor_script\|*.lua_  setlocal filetype=lua
 
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
@@ -80,7 +83,12 @@ let g:html_indent_style1 = "inc"
 let g:NERDSpaceDelims = 1
 let g:ctrlp_working_path_mode = 0
 let g:vim_json_syntax_conceal = 0
-let g:coc_global_extensions = ['coc-tsserver']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-defold-ide']
+let g:coc_node_path = '/opt/homebrew/bin/node'
+
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+nmap <silent> gd <Plug>(coc-definition)
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -101,6 +109,7 @@ endif
 
 if has("gui_macvim")
   map <D-j> :CtrlP<CR>
+  let $PATH .=':/opt/homebrew/bin'
 end
 
 if has("win32") || has("win64")
@@ -131,10 +140,10 @@ set updatetime=300
   " \ CheckBackspace() ? "\<TAB>" :
   " \ coc#refresh()
 
-" function! CheckBackspace() abort
-  " let col = col('.') - 1
-  " return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
@@ -155,4 +164,4 @@ endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-
+command! StandardFix execute "lcd %:p:h | !npx ts-standard --fix % | lcd -"
